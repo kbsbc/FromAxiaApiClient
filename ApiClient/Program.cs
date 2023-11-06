@@ -44,7 +44,7 @@ namespace ApiClient
                         return;
                     }
                 }
-                JsonSerializer.Deserialize<ConfirmedPriceModel>(InstanceJson!); // Throws if json is not ConfirmedPriceModel
+                JsonSerializer.Deserialize<ConfirmedPriceModel>(InstanceJson!); // Throws if json is not ConfirmedPriceModel (or not json)
 
                 Configuration = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
@@ -54,6 +54,10 @@ namespace ApiClient
                 ApiConfig = Configuration.GetSection("Api").Get<ApiConfiguration>() ?? new ApiConfiguration();
 
                 await PostConfirmedPriceDoc(await GetToken());
+
+                Console.Write("Strike a key");
+                Console.ReadKey();
+
             }
             catch (Exception x)
             {
